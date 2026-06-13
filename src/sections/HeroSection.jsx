@@ -2,36 +2,43 @@ export default function HeroSection() {
   return (
     <section
       style={{
-        background: "#ecf4df",
-        backgroundImage: `
-          radial-gradient(circle at 75% 50%, rgba(255,255,255,0.22) 0%, transparent 55%),
-          repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(160,200,150,0.18) 40px),
-          repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(160,200,150,0.18) 40px)
-        `,
-        minHeight: "100dvh",
+        background: "#eef7e8",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "48px 40px",
+        padding: "52px 60px",
         fontFamily: "Inter, system-ui, sans-serif",
         overflow: "hidden",
         position: "relative",
       }}
     >
+      {/* Full-section background pattern */}
+      <div style={{
+        position: "absolute",
+        inset: 0,
+        backgroundImage: `
+          repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(140,190,120,0.15) 40px),
+          repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(140,190,120,0.15) 40px)
+        `,
+        pointerEvents: "none",
+      }} />
+
       <div
         style={{
-          maxWidth: 1000,
+          maxWidth: 1100,
           width: "100%",
           display: "flex",
           alignItems: "center",
           gap: 40,
           flexWrap: "wrap",
+          position: "relative",
+          zIndex: 1,
         }}
       >
         {/* ── Left: text content ── */}
         <div style={{ flex: 1, minWidth: 280 }}>
 
-          {/* Title + avatar placeholders */}
+          {/* Title + avatars */}
           <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
             <h1
               style={{
@@ -46,31 +53,29 @@ export default function HeroSection() {
               EZPECS
             </h1>
 
-            {/* Avatar image holders */}
+            {/* Avatar circles — replace each div with <img> when you have photos */}
             <div style={{ display: "flex", alignItems: "center" }}>
-              {[0, 1, 2].map((i) => (
+              {["A", "B", "C"].map((letter, i) => (
                 <div
                   key={i}
                   style={{
                     width: 32,
                     height: 32,
                     borderRadius: "50%",
-                    background: ["#c8e6c9", "#ffe0b2", "#bbdefb"][i],
-                    border: "2px solid #d8ecd0",
+                    background: ["#e8a598", "#d4845a", "#c97b6e"][i],
+                    border: "2px solid #e1f5d7",
                     marginLeft: i === 0 ? 0 : -8,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    fontSize: 11,
-                    color: "#555",
-                    fontWeight: 600,
-                    overflow: "hidden",
+                    fontSize: 12,
+                    color: "#fff",
+                    fontWeight: 700,
                     flexShrink: 0,
+                    overflow: "hidden",
                   }}
-                  title={`Avatar placeholder ${i + 1} — replace with <img>`}
                 >
-                  {/* swap this div for <img src="..." style={{width:'100%',height:'100%',objectFit:'cover'}} /> */}
-                  👤
+                  {letter}
                 </div>
               ))}
             </div>
@@ -96,8 +101,8 @@ export default function HeroSection() {
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 28 }}>
             <button
               style={{
-                background: "#ffffff",
-                //border: "1.5px solid #2d6a35",
+                background: "transparent",
+                border: "1.5px solid #2d6a35",
                 color: "#2d6a35",
                 padding: "9px 20px",
                 borderRadius: 8,
@@ -115,7 +120,7 @@ export default function HeroSection() {
                 e.currentTarget.style.color = "#fff";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = "#ffffff";
+                e.currentTarget.style.background = "transparent";
                 e.currentTarget.style.color = "#2d6a35";
               }}
             >
@@ -146,7 +151,7 @@ export default function HeroSection() {
           </div>
 
           {/* Stats row */}
-          <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
+          <div style={{ display: "flex", alignItems: "center" }}>
 
             {/* 100+ Users */}
             <div style={{ paddingRight: 20 }}>
@@ -200,33 +205,48 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* ── Right: image placeholder ── */}
-        <div
-          style={{
-            flexShrink: 0,
-            width: 300,
-            height: 220,
-            borderRadius: 16,
-            background: "rgba(255,255,255,0.25)",
-            border: "2px dashed rgba(45,110,50,0.3)",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 8,
-            color: "rgba(45,90,39,0.5)",
-            fontSize: 13,
-            fontWeight: 500,
-          }}
-          title="Tablet image placeholder — replace this div with <img src='...' />"
-        >
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(45,110,50,0.4)" strokeWidth="1.5">
-            <rect x="3" y="3" width="18" height="18" rx="3" />
-            <circle cx="8.5" cy="8.5" r="1.5" />
-            <path d="M21 15l-5-5L5 21" />
-          </svg>
-          <span>Tablet image</span>
-          <span style={{ fontSize: 11, opacity: 0.7 }}>Replace with &lt;img&gt;</span>
+        {/* ── Right: tablet image — bleeds out and gets cropped by section overflow:hidden ── */}
+        <div style={{
+          flexShrink: 0,
+          width: 500,
+          marginRight: -60,
+          marginTop: -52,
+          marginBottom: -52,
+          position: "relative",
+          alignSelf: "stretch",
+          display: "flex",
+          alignItems: "center",
+        }}>
+          {/* Blurred copy as background */}
+          <img
+            src="/images/tablet-mockup.png"
+            alt=""
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "left center",
+              filter: "blur(18px)",
+              transform: "scale(1.5)",
+              opacity: 0.85,
+            }}
+          />
+          {/* Sharp image on top */}
+          <img
+            src="/images/tablet-mockup.png"
+            alt="EZPECS tablet mockup"
+            style={{
+              position: "relative",
+              zIndex: 1,
+              width: "100%",
+              height: "auto",
+              objectFit: "contain",
+              display: "block",
+            }}
+          />
         </div>
       </div>
     </section>
